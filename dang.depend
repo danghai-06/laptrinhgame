@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1741653301 source:d:\dang\main.cpp
+1742381265 source:d:\dang\main.cpp
+	<iostream>
 	<SDL.h>
 	<iostream>
 

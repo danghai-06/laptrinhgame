@@ -1,4 +1,5 @@
 #include    <SDL.h>
+#include<SDL
 #include <iostream>
 using namespace std;
 const int SCREEN_WIDTH = 800;
@@ -13,13 +14,14 @@ public:
     bool runing;
 
     Game() {
-    running = true ;
+    bool running = true ;
  if(SDL_Init(SDL_INIT_VIDEO) < 0){
 cerr<<"SDL  COULD NOT INITIALIZE ! SDL ERROR : "<<SDL_GetError()<<endl;
 running = false ;
 
      }
-     window = SDL_Create_Window("Battle City ",  SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH , SCREEN_HEIGHT , SDL_WINDOW_SHOWN);
+
+    sdl_window window = SDL_Create_Window("Battle City ",  SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH , SCREEN_HEIGHT , SDL_WINDOW_SHOWN);
      if(!window){
         cerr<<"Window could not be created ! SDL_Error: "<< SDL_GetError()<<endl;
         running = false ;
@@ -56,6 +58,9 @@ running = false ;
     }
 
 };
+
+
+
 int main(int argc , char* argv[] ){
  Game game ;
  if(game.running){
@@ -64,6 +69,9 @@ int main(int argc , char* argv[] ){
  return 0;
 
 }
+
+}
+
 
 
 
