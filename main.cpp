@@ -1,6 +1,7 @@
 #include    <SDL.h>
 #include<SDL
 #include <iostream>
+#include<vector>
 using namespace std;
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -12,6 +13,7 @@ public:
     SDL_Window* windows;
     SDL_Renderer* renderer;
     bool runing;
+    vector<Wall> walls;
 
     Game() {
     bool running = true ;
@@ -31,6 +33,7 @@ running = false ;
         cerr<<"Renderer could not be created ! SDL_Error:   "<<SDL_GetError() <<endl;
         running = false ;
      }
+     generateWalls();
      }
     void render() {
     SDL__SetRenderDrawColor(renderer, 128, 128, 128, 255);
@@ -42,6 +45,9 @@ running = false ;
             SDL_Rect title = { j * TITLE_SIZE, i * TITLE_SIZE, TITLE_SIZE, TITLE_SIZE};
             SDL_RenderFillRect(renderer, &tile);
          }
+    }
+    for(int i = 0 ; i < walls.size() ; i++){
+        walls[i].render(renderer);
     }
     SDL_RenderPresent(renderer);
     }
@@ -59,7 +65,41 @@ running = false ;
 
 };
 
+class Wall {
+ public;
+  int x,y;
+  SDL_Rect rect;
+  bool active;
 
+  Wall(int startX, int startY) {
+  x = startX;
+  y = startY;
+  active = true;
+  rect = {x,y, TILE_SIZE, TILE};
+
+  }
+
+  void render(SDL_Renderer* renderer) {
+   if(active){
+    SDL_SetRenderDrawColor(renderer, 150, 75, 0, 255);
+    SDL_RenderFillRect(renderer, &rect);
+   }
+  }
+};
+  void generateWalls(){
+  for(int i = 3 ; i < MAP_HEIGHT - 3 ; i+=2){
+    for(int i = 3 ; j < MAP_WIDTH - 3 ; J +=2){
+        Wall w = Wall(j * TILE_SIZE , i * TILE_SIZE);
+        walls.push_back(w);
+    }
+  }
+
+}
+ class PlayerTank{
+ public:
+
+
+ };
 
 int main(int argc , char* argv[] ){
  Game game ;
