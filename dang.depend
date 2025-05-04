@@ -1,12 +1,14 @@
 # depslib dependency file v1.0
-1744723065 source:d:\dang\main.cpp
+1746375482 source:d:\dang\main.cpp
 	<SDL.h>
 	<SDL_image.h>
+	<SDL_ttf.h>
 	<iostream>
 	<vector>
 	<algorithm>
 	<cstdlib>
 	<ctime>
+	<SDL_mixer.h>
 
 1540998638 c:\users\hai dang\downloads\sdl2-devel-2.0.9-mingw\sdl2-2.0.9\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -351,6 +353,32 @@
 	"close_code.h"
 
 1739840811 c:\users\hai dang\downloads\sdl2_image-devel-2.8.2-mingw\sdl2_image-2.8.2\x86_64-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1744723525 c:\users\hai dang\downloads\sdl2_mixer-devel-2.6.2-mingw\sdl2_mixer-2.6.2\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1675732513 d:\sdl2_ttf-devel-2.20.2-mingw\sdl2_ttf-2.20.2\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1561870398 d:\sdl2_image-devel-2.0.5-mingw\sdl2_image-2.0.5\x86_64-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1540998002 d:\sdl2_image-devel-2.0.4-mingw\sdl2_image-2.0.4\x86_64-w64-mingw32\include\sdl2\sdl_image.h
 	"SDL.h"
 	"SDL_version.h"
 	"begin_code.h"

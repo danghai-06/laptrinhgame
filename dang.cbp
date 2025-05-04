@@ -14,13 +14,19 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="C:/Users/hai dang/Downloads/SDL2-devel-2.0.9-mingw/SDL2-2.0.9/x86_64-w64-mingw32/include/SDL2" />
-					<Add directory="C:/Users/hai dang/Downloads/SDL2_image-devel-2.8.2-mingw/SDL2_image-2.8.2/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="C:/Users/hai dang/Downloads/SDL2_mixer-devel-2.6.2-mingw/SDL2_mixer-2.6.2/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="../SDL2_ttf-devel-2.20.2-mingw/SDL2_ttf-2.20.2/x86_64-w64-mingw32/include/SDL2" />
+					<Add directory="../SDL2_image-devel-2.0.5-mingw/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2" />
 				</Compiler>
 				<Linker>
 					<Add option="-lmingw32 -lSDL2main -lSDL2" />
 					<Add option="-lSDL2_image" />
+					<Add option="-ISDL2_mixer" />
+					<Add option="-ISDL2_tff" />
 					<Add directory="C:/Users/hai dang/Downloads/SDL2-devel-2.0.9-mingw/SDL2-2.0.9/x86_64-w64-mingw32/lib" />
-					<Add directory="C:/Users/hai dang/Downloads/SDL2_image-devel-2.8.2-mingw/SDL2_image-2.8.2/x86_64-w64-mingw32/lib" />
+					<Add directory="C:/Users/hai dang/Downloads/SDL2_mixer-devel-2.6.2-mingw/SDL2_mixer-2.6.2/x86_64-w64-mingw32/lib" />
+					<Add directory="../SDL2_ttf-devel-2.20.2-mingw/SDL2_ttf-2.20.2/x86_64-w64-mingw32/lib" />
+					<Add directory="../SDL2_image-devel-2.0.5-mingw/SDL2_image-2.0.5/x86_64-w64-mingw32/lib/pkgconfig" />
 				</Linker>
 			</Target>
 			<Target title="Release">
