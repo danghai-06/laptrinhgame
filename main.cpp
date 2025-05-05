@@ -137,18 +137,23 @@ public:
    int x, y;
    SDL_Rect rect;
    bool active;
+   SDL_Texture* wallTexture;
 
-   Wall(int startX, int startY) {
+     Wall(int startX, int startY) {
       x = startX;
       y = startY;
       active = true;
       rect = {x, y, TILE_SIZE, TILE_SIZE};
+      wallTexture = nullptr;
    }
-
-   void render(SDL_Renderer* renderer) {
+    void render(SDL_Renderer* renderer) {
       if(active) {
+         if(wallTexture) {
+            SDL_RenderCopy(renderer, wallTexture, NULL, &rect);
+         } else {
             SDL_SetRenderDrawColor(renderer, 150, 75, 0, 255);
             SDL_RenderFillRect(renderer, &rect);
+         }
       }
    }
 };
@@ -339,7 +344,7 @@ public:
    void shoot() {
       if(--shootDelay > 0) return;
       shootDelay = 5;
-      bullets.push_back(Bullet(x + TILE_SIZE / 2 - 5, y + TILE_SIZE / 2 - 5, dirX, dirY, 2)); // 2 represents enemy bullets
+      bullets.push_back(Bullet(x + TILE_SIZE / 2 - 5, y + TILE_SIZE / 2 - 5, dirX, dirY, 2));
    }
 
    void updateBullets() {
@@ -373,7 +378,7 @@ public:
    bool gameOver;
    string winMessage;
    Mix_Music* backgroundMusic;
-
+   SDL_Texture* wallTexture;
    SDL_Texture* player1TankTexture;
    SDL_Texture* player2TankTexture;
    SDL_Texture* enemyTankTexture;
@@ -428,6 +433,17 @@ public:
          cerr << "RENDERER COULD NOT BE CREATED! SDL_Error: " << SDL_GetError() << endl;
          running = false;
       }
+       SDL_Surface* wallSurface = IMG_Load("image/wall.png");
+     if(wallSurface) {
+     wallTexture = SDL_CreateTextureFromSurface(renderer, wallSurface);
+     SDL_FreeSurface(wallSurface);
+     if(!wallTexture) {
+        cerr << "Failed to create texture for wall! SDL Error: " << SDL_GetError() << endl;
+    }
+     } else {
+    cerr << "Failed to load wall image! SDL_image Error: " << IMG_GetError() << endl;
+    }
+
 
        SDL_Surface* tempSurface = IMG_Load("image/tank.jpg");
     if(tempSurface) {
@@ -476,7 +492,7 @@ public:
       }
 
       if(backgroundMusic) {
-         Mix_PlayMusic(backgroundMusic, -1);  // -1 nghĩa là lặp vô hạn
+         Mix_PlayMusic(backgroundMusic, -1);
       }
 
    }
@@ -501,7 +517,7 @@ public:
     }
 
       if(titleFont) {
-         SDL_Color titleColor = {255, 255, 0, 255}; // Màu vàng
+         SDL_Color titleColor = {255, 255, 0, 255};
          string titleText = "BATTLE CITY";
          SDL_Surface* titleSurface = TTF_RenderText_Solid(titleFont, titleText.c_str(), titleColor);
          if(titleSurface) {
@@ -519,7 +535,7 @@ public:
             SDL_FreeSurface(titleSurface);
          }
 
-         SDL_Color infoColor = {255, 255, 255, 255}; // Màu trắng
+         SDL_Color infoColor = {255, 255, 255, 255};
          string controlsText = "Player 1: WASD to move, SPACE to shoot";
          SDL_Surface* controlsSurface = TTF_RenderText_Solid(font, controlsText.c_str(), infoColor);
          if(controlsSurface) {
@@ -624,13 +640,14 @@ public:
 
    void generateWalls() {
       walls.clear();
-      for(int i = 3; i < MAP_HEIGHT - 3; i += 2) {
-            for(int j = 3; j < MAP_WIDTH - 3; j += 2) {
-               Wall w = Wall(j * TILE_SIZE, i * TILE_SIZE);
-               walls.push_back(w);
-            }
+    for(int i = 3; i < MAP_HEIGHT - 3; i += 2) {
+      for(int j = 3; j < MAP_WIDTH - 3; j += 2) {
+         Wall w = Wall(j * TILE_SIZE, i * TILE_SIZE);
+         w.wallTexture = wallTexture;
+         walls.push_back(w);
       }
    }
+}
 
    void handleStartScreenEvents() {
       SDL_Event event;
@@ -1007,8 +1024,10 @@ public:
          Mix_FreeMusic(backgroundMusic);
          backgroundMusic = nullptr;
       }
-
-
+      if(wallTexture) {
+     SDL_DestroyTexture(wallTexture);
+    wallTexture = nullptr;
+   }
       delete startButton;
       delete quitButton;
       delete restartButton;
